@@ -1,1 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MosquiScan - Drone-Assisted AI Inspection and Geospatial Mapping System"
+    >
+
+    <title>🦟 MosquiScan</title>
+
+
+    <!-- =====================================================
+         MOSQUISCAN CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- =====================================================
+         LEAFLET CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="main-header">
+
+        <div class="header-content">
+
+            <div class="school-brand">
+
+
+                <!-- SCHOOL LOGO -->
+
+                <img
+                    src="cmhs-logo.png.jpg"
+                    alt="Candijay Municipal High School Logo"
+                    class="school-logo"
+                >
+
+
+                <!-- BRAND INFORMATION -->
+
+                <div class="brand-text">
+
+
+                    <!-- SYSTEM TITLE -->
+
+                    <div class="system-title">
+
+                        <span class="mosquito-icon">
+                            🦟
+                        </span>
+
+                        <h1>
+                            MosquiScan
+                        </h1>
+
+                    </div>
+
+
+                    <!-- SUBTITLE -->
+
+                    <p class="system-subtitle">
+                        Drone-Assisted AI Inspection and
+                        Geospatial Mapping System
+                    </p>
+
+
+                    <!-- SCHOOL -->
+
+                    <div class="school-name">
+                        CANDIJAY MUNICIPAL HIGH SCHOOL • BOHOL
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="system-status">
+
+                        <span class="status-dot"></span>
+
+                        SYSTEM READY
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="container">
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section class="dashboard">
+
+
+            <!-- TOTAL RECORDS -->
+
+            <div class="dashboard-card total-card">
+
+                <div class="card-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <h3>
+                        Total Records
+                    </h3>
+
+                    <p id="totalRecords">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- POSSIBLE SITES -->
+
+            <div class="dashboard-card possible-card">
+
+                <div class="card-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <h3>
+                        Possible Sites
+                    </h3>
+
+                    <p id="possibleSites">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NOT POSSIBLE -->
+
+            <div class="dashboard-card not-possible-card">
+
+                <div class="card-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <h3>
+                        Not Possible Sites
+                    </h3>
+
+                    <p id="notPossibleSites">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AI IMAGE ANALYSIS
+        ================================================== -->
+
+        <section class="card">
+
+            <h2>
+                📷 Image Upload and AI Analysis
+            </h2>
+
+
+            <div class="upload-area">
+
+
+                <label for="imageInput">
+                    Select Drone Image
+                </label>
+
+
+                <input
+                    type="file"
+                    id="imageInput"
+                    accept="image/*"
+                >
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div class="preview-container">
+
+                    <img
+                        id="imagePreview"
+                        src=""
+                        alt="Selected drone image preview"
+                        style="display: none;"
+                    >
+
+                </div>
+
+
+                <!-- ANALYZE BUTTON -->
+
+                <button
+                    id="analyzeButton"
+                    type="button"
+                    disabled
+                >
+                    🤖 Analyze Image
+                </button>
+
+
+                <!-- AI RESULT -->
+
+                <div
+                    id="aiResult"
+                    class="result-box"
+                >
+                    AI model is loading...
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INSPECTION LOCATION
+        ================================================== -->
+
+        <section class="card">
+
+            <h2>
+                📍 Inspection Location
+            </h2>
+
+
+            <!-- MAP -->
+
+            <div
+                id="map"
+                class="map-container"
+            ></div>
+
+
+            <!-- CURRENT LOCATION -->
+
+            <button
+                id="locationButton"
+                type="button"
+            >
+                📍 Use Current Location
+            </button>
+
+
+            <!-- COORDINATES -->
+
+            <div class="coordinates">
+
+
+                <div>
+
+                    <label for="latitude">
+                        Latitude
+                    </label>
+
+                    <input
+                        type="text"
+                        id="latitude"
+                        placeholder="Enter latitude"
+                    >
+
+                </div>
+
+
+                <div>
+
+                    <label for="longitude">
+                        Longitude
+                    </label>
+
+                    <input
+                        type="text"
+                        id="longitude"
+                        placeholder="Enter longitude"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <p class="map-help">
+                Click directly on the map to select
+                the inspection location.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INSPECTION DETAILS
+        ================================================== -->
+
+        <section class="card">
+
+            <h2>
+                📝 Inspection Details
+            </h2>
+
+
+            <!-- DATE -->
+
+            <div class="form-group">
+
+                <label for="inspectionDate">
+                    Inspection Date
+                </label>
+
+                <input
+                    type="date"
+                    id="inspectionDate"
+                >
+
+            </div>
+
+
+            <!-- NOTES -->
+
+            <div class="form-group">
+
+                <label for="notes">
+                    Notes
+                </label>
+
+                <textarea
+                    id="notes"
+                    rows="4"
+                    placeholder="Enter additional observations or notes..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <button
+                id="saveButton"
+                type="button"
+                class="save-button"
+            >
+                💾 Save Inspection
+            </button>
+
+
+            <p
+                id="saveMessage"
+                class="save-message"
+            ></p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INSPECTION RECORDS
+        ================================================== -->
+
+        <section class="card">
+
+
+            <div class="section-header">
+
+                <h2>
+                    📋 Inspection Records
+                </h2>
+
+
+                <button
+                    id="clearRecordsButton"
+                    type="button"
+                    class="clear-button"
+                >
+                    🗑️ Clear Records
+                </button>
+
+            </div>
+
+
+            <div id="recordsList">
+
+                <p class="no-records">
+                    No inspection records yet.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+            🦟 MosquiScan |
+            Drone-Assisted AI Inspection and
+            Geospatial Mapping System
+        </p>
+
+        <p class="footer-school">
+            Candijay Municipal High School • Bohol
+        </p>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT LIBRARIES
+    ====================================================== -->
+
+
+    <!-- LEAFLET -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+
+    <!-- TENSORFLOW.JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"
+    ></script>
+
+
+    <!-- TEACHABLE MACHINE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"
+    ></script>
+
+
+    <!-- =================================================
+         MOSQUISCAN JAVASCRIPT
+    ================================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>
